@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcader's Archive // Your Gateway to Gaming</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Playfair Display (Art Deco/BioShock), Orbitron (Tech/Toonami), Inter (Body/Readability) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+
+    <style>
+        :root {
+            --logo-silver: #a0aec0; /* Lighter silver from logo */
+            --logo-blue-glow: #8bbce0; /* Digital blue glow from logo */
+            --dark-background: #1c232d;
+            --off-white-text: #e6e0d4; /* Aged paper/cream for main titles */
+            --muted-gray-text: #d4d4d4; /* Off-white for general text */
+            --accent-gold: #b58d4a; /* Aged gold/bronze */
+            --accent-red: #c94a4a; /* Muted rust/warning red */
+            --card-background: #2a364a;
+            --border-muted-blue: #4a6f8f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-background);
+            color: var(--muted-gray-text); /* Off-white for general text */
+            overflow-x: hidden;
+            /* Battle-torn power armor texture */
+            background-image: url('https://placehold.co/1920x1080/303030/555555/0.2/texture?text=Worn+Metal+Armor');
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay; /* Blends the image with the background-color */
+        }
+
+        .header-bg {
+            background-color: rgba(28, 35, 45, 0.9); /* Slightly transparent dark */
+            backdrop-filter: blur(8px); /* More pronounced blur */
+            border-bottom: 1px solid rgba(74, 95, 120, 0.4); /* Muted border */
+        }
+
+        .main-title-font {
+            font-family: 'Playfair Display', serif; /* BioShock Art Deco */
+            color: var(--off-white-text); /* Aged paper/cream */
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* Soft, old-world glow */
+        }
+
+        .sub-title-font {
+            font-family: 'Orbitron', sans-serif; /* Toonami/Sci-Fi tech */
+            color: var(--logo-blue-glow); /* Muted digital blue from logo */
+            text-transform: uppercase;
+        }
+
+        .accent-color-gold {
+            color: var(--accent-gold); /* Aged gold/bronze */
+        }
+        .accent-color-red {
+            color: var(--accent-red); /* Muted rust/warning red */
+        }
+
+        .btn-mixed-tech {
+            background-color: var(--accent-gold); /* Aged gold/bronze */
+            border: 1px solid var(--accent-gold);
+            color: var(--dark-background); /* Dark text for contrast */
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            font-family: 'Orbitron', sans-serif; /* Techy button text */
+        }
+
+        .btn-mixed-tech:hover {
+            background-color: var(--accent-gold); /* Keep same base, but with more intense glow */
+            box-shadow: 0 0 20px var(--logo-blue-glow); /* Blue glow on hover */
+            color: var(--dark-background); /* Even darker text on hover */
+            border-color: var(--logo-blue-glow);
+        }
+
+        .btn-mixed-tech::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-mixed-tech:hover::before {
+            left: 100%;
+        }
+
+        .section-separator {
+            width: 75%; /* More prominent separator */
+            height: 2px; /* Thicker */
+            background: linear-gradient(90deg, transparent 0%, var(--accent-gold) 20%, var(--logo-blue-glow) 50%, var(--accent-red) 80%, transparent 100%);
+            margin: 6rem auto;
+            box-shadow: 0 0 15px var(--logo-blue-glow); /* Blue glow */
+            border-radius: 9999px; /* Rounded ends */
+        }
+
+        .card-mixed-tech {
+            background-color: var(--card-background); /* Darker, slightly blue-grey card */
+            border: 1px solid var(--border-muted-blue); /* Muted blue border */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card-mixed-tech:hover {
+            border-color: var(--accent-gold); /* Gold border on hover */
+            box-shadow: 0 0 20px var(--logo-blue-glow); /* Soft blue glow on hover */
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .logo-mixed-tech-glow {
+            filter: drop-shadow(0 0 12px var(--logo-blue-glow)); /* Stronger blue glow from logo */
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+        }
+
+        .header-text-shadow {
+            text-shadow: 0 0 10px var(--off-white-text); /* Stronger cream glow */
+        }
+
+        .segment-icon {
+            color: var(--logo-blue-glow); /* Digital blue for icons */
+            transition: color 0.2s ease;
+        }
+
+        .segment-card:hover .segment-icon {
+            color: var(--off-white-text); /* Lighter cream/gold on hover */
+        }
+
+        /* Glitch effect for subtle animations */
+        @keyframes glitch {
+            0% { transform: translate(0); opacity: 1; }
+            20% { transform: translate(-2px, 2px); opacity: 0.9; }
+            40% { transform: translate(-2px, -2px); opacity: 1; }
+            60% { transform: translate(3px, 3px); opacity: 0.9; }
+            80% { transform: translate(1px, -1px); opacity: 1; }
+            100% { transform: translate(0); opacity: 1; }
+        }
+
+        .flicker-text {
+            animation: flicker 3s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 0 0 4px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.6);
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header / Navigation -->
+    <header class="p-4 md:px-8 flex justify-between items-center header-bg fixed top-0 left-0 w-full z-20 rounded-b-lg">
+        <div class="flex items-center">
+            <img src="ArcadersArchive.png" alt="Arcader's Archive Logo" class="h-10 mr-4 logo-mixed-tech-glow">
+            <span class="text-xl font-bold main-title-font flicker-text">ARCADER'S ARCHIVE</span>
+        </div>
+        <nav class="hidden md:flex space-x-6 text-lg sub-title-font">
+            <a href="#show" class="hover:text-blue-300 transition-colors duration-200">THE SHOW</a>
+            <a href="#featured" class="hover:text-blue-300 transition-colors duration-200">CLIPS & PHOTOS</a>
+            <a href="#community" class="hover:text-blue-300 transition-colors duration-200">COMMUNITY</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-28 pb-12">
+        <!-- Hero Section -->
+        <section class="hero-section relative h-[80vh] flex items-center justify-center text-center">
+            <div class="relative z-10 p-6 md:p-12 card-mixed-tech rounded-xl max-w-4xl border border-amber-700 border-opacity-40">
+                <h1 class="text-5xl md:text-7xl font-extrabold main-title-font mb-4 leading-tight header-text-shadow">
+                    REALITIES COLLIDE. <br> YOUR GAMING HISTORY. UNLOCKED.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto sub-title-font">
+                    EXPLORE FORGOTTEN WORLDS. FIND YOUR NEXT EPIC MOMENT.
+                </p>
+                <button class="px-10 py-4 rounded-xl btn-mixed-tech text-xl font-bold shadow-lg hover:shadow-blue-500/50">
+                    <span>START YOUR ADVENTURE</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <!-- The Archive's Contents: Featured Content -->
+        <section id="featured" class="container mx-auto px-4 py-12">
+            <h2 class="text-4xl font-bold text-center mb-10 main-title-font header-text-shadow">FEATURED FINDS // FROM THE ARCHIVE</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Placeholder for Featured Clip/Photo 1 -->
+                <div class="card-mixed-tech rounded-xl overflow-hidden transition-all duration-300">
+                    <img src="https://placehold.co/600x337/2a364a/8bbce0?text=EPIC+WIN+01" alt="Featured Gaming Moment" class="w-full h-auto object-cover border-b border-gray-700">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold main-title-font mb-2">EPIC WIN: LAST STAND IN SECTOR 01</h3>
+                        <p class="text-gray-400 text-sm">A thrilling comeback from the brink. You won't believe it.</p>
+                        <a href="#" class="mt-4 inline-block accent-color-red hover:text-red-300 text-sm font-medium sub-title-font">WATCH CLIP <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <!-- Placeholder for Featured Clip/Photo 2 -->
+                <div class="card-mixed-tech rounded-xl overflow-hidden transition-all duration-300">
+                    <img src="https://placehold.co/600x337/2a364a/8bbce0?text=STUNNING+VISTA+02" alt="Featured Gaming Moment" class="w-full h-auto object-cover border-b border-gray-700">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold main-title-font mb-2">STUNNING VISTA: THE GRAND HALL'S ECHOES</h3>
+                        <p class="text-gray-400 text-sm">Capture the beauty of a world long past. Perfect for your next project.</p>
+                        <a href="#" class="mt-4 inline-block accent-color-gold hover:text-amber-300 text-sm font-medium sub-title-font">VIEW PHOTO <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <!-- Placeholder for Featured Clip/Photo 3 -->
+                <div class="card-mixed-tech rounded-xl overflow-hidden transition-all duration-300">
+                    <img src="https://placehold.co/600x337/2a364a/8bbce0?text=HILARIOUS+FAIL+03" alt="Featured Gaming Moment" class="w-full h-auto object-cover border-b border-gray-700">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold main-title-font mb-2">HILARIOUS FAIL: SUBJECT 7'S MISADVENTURE</h3>
+                        <p class="text-gray-400 text-sm">Sometimes things just go wrong. And it's hilarious. See for yourself.</p>
+                        <a href="#" class="mt-4 inline-block accent-color-red hover:text-red-300 text-sm font-medium sub-title-font">GET A LAUGH <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 rounded-lg btn-mixed-tech font-semibold">
+                    <span>BROWSE ALL CLIPS & PHOTOS</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <!-- The Broadcast: The Arcader's Archive Show -->
+        <section id="show" class="container mx-auto px-4 py-12 text-center">
+            <h2 class="text-4xl font-bold mb-10 main-title-font header-text-shadow">THE ARCADER'S ARCHIVE SHOW // LIVE BROADCAST</h2>
+            <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto sub-title-font">
+                TUNE IN WITH OUR HOST & ARCHIE. EXPLORING THE FRACTURED NEXUS. NEW EPISODES WEEKLY.
+            </p>
+            <div class="relative w-full max-w-4xl mx-auto mb-8 aspect-video card-mixed-tech rounded-xl overflow-hidden shadow-xl border border-red-700 border-opacity-40">
+                <!-- Placeholder for embedded video player -->
+                <img src="https://placehold.co/800x450/2a364a/8bbce0?text=LATEST+EPISODE+NOW+LIVE" alt="Latest Episode Thumbnail" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
+                    <button class="text-white text-6xl hover:text-blue-300 transition-colors duration-200">
+                        <i class="fas fa-play-circle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 text-center max-w-5xl mx-auto mt-10">
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-satellite-dish text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">ARCADER'S ODYSSEY</h3>
+                </div>
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-microscope text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">ARCADER'S LOG</h3>
+                </div>
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-map-signs text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">ARCADER'S ADVENTURES</h3>
+                </div>
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-recycle text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">REBUILD, REBOOT, REVISIT</h3>
+                </div>
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-exclamation-circle text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">GLITCHES, BLUNDERS, AND BUGS</h3>
+                </div>
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-crosshairs text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">CLUTCH MOMENTS</h3>
+                </div>
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-hard-hat text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">BUILD A GAME</h3>
+                </div>
+                <div class="p-4 card-mixed-tech rounded-lg transition-all duration-200 segment-card">
+                    <i class="fas fa-radiation text-4xl segment-icon mb-3"></i>
+                    <h3 class="font-semibold text-white sub-title-font">BANANA ALPHA SQUADRON</h3>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 rounded-lg btn-mixed-tech font-semibold">
+                    <span>WATCH ALL EPISODES</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <!-- The Hub: Community & Custom Orders -->
+        <section id="community" class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Join the Honorary Arcaders -->
+                <div class="card-mixed-tech p-8 rounded-xl text-center">
+                    <h3 class="text-3xl font-bold main-title-font mb-4 header-text-shadow">JOIN THE ARCADERS // BE PART OF THE STORY</h3>
+                    <p class="text-gray-400 mb-6 sub-title-font">
+                        SHARE YOUR CLIPS & PHOTOS. EARN YOUR PLACE. HELP US REBUILD GAMING HISTORY.
+                    </p>
+                    <button class="px-8 py-3 rounded-lg btn-mixed-tech font-semibold">
+                        <span>BECOME AN ARCADER // SIGN UP</span>
+                    </button>
+                </div>
+                <!-- Request Custom Footage -->
+                <div class="card-mixed-tech p-8 rounded-xl text-center">
+                    <h3 class="text-3xl font-bold main-title-font mb-4 header-text-shadow">NEED SPECIFIC FOOTAGE? // WE'LL FIND IT.</h3>
+                    <p class="text-gray-400 mb-6 sub-title-font">
+                        OUR TEAM OF ARCADERS CAN CAPTURE THE EXACT MOMENT YOU NEED. JUST ASK.
+                    </p>
+                    <button class="px-8 py-3 rounded-lg btn-mixed-tech font-semibold">
+                        <span>REQUEST CUSTOM CLIPS // GET STARTED</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="header-bg py-8 mt-12 text-center text-gray-500 rounded-t-lg">
+        <img src="ArcadersArchive.png" alt="Arcader's Archive Logo" class="h-8 mx-auto mb-4 logo-mixed-tech-glow">
+        <p class="mb-4 text-sm">&copy; 2025 Arcader's Archive // ALL RIGHTS RESERVED. // KEEP WATCHING THE SKIES.</p>
+        <div class="flex justify-center space-x-6 mb-6 sub-title-font">
+            <a href="#" class="hover:text-blue-300 transition-colors duration-200">TERMS OF SERVICE</a>
+            <a href="#" class="hover:text-blue-300 transition-colors duration-200">DMCA POLICY</a>
+            <a href="#" class="hover:text-blue-300 transition-colors duration-200">PRIVACY POLICY</a>
+        </div>
+        <div class="flex justify-center space-x-6 text-2xl">
+            <a href="#" class="hover:text-blue-300 transition-colors duration-200"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="hover:text-blue-300 transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-blue-300 transition-colors duration-200"><i class="fab fa-discord"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
